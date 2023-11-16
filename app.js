@@ -8,6 +8,7 @@ const path = require("path");
 app.engine("handlebars", exphbs.engine());
 app.set("view engine", "handlebars");
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(routes);
 
