@@ -6,7 +6,7 @@ const exphbs = require("express-handlebars");
 const path = require("path");
 const flash = require("connect-flash");
 const session = require("express-session");
-const passport = require("passport");
+const passport = require("./config/passport");
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
@@ -25,14 +25,23 @@ app.use(
 );
 app.use(flash());
 app.use((req, res, next) => {
+  if (req.session.token) {
+    req.headers.authorization = `Bearer ${req.session.token}`;
+    return next();
+  }
+  return next();
+});
+app.use((req, res, next) => {
   res.locals.success_messages = req.flash("success_messages"); // 設定 success_msg 訊息
   res.locals.error_messages = req.flash("error_messages"); // 設定 error_msg 訊息
   res.locals.warning_messages = req.flash("warning_messages"); // 設定 warning_msg 訊息
-  return next();
+  res.locals.user = req.user;
+  next();
 });
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.use(routes);
 
 app.listen(PORT, () => {

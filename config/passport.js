@@ -5,9 +5,10 @@ const JwtStrategy = passportJWT.Strategy;
 const db = require("../models");
 const User = db.User;
 
+
 const jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = process.env.JWT_SECRET;
+jwtOptions.secretOrKey = "test2";
 jwtOptions.passReqToCallback = true;
 
 const jwtStrategy = new JwtStrategy(jwtOptions, async (req, payload, cb) => {
@@ -23,6 +24,7 @@ const jwtStrategy = new JwtStrategy(jwtOptions, async (req, payload, cb) => {
   }
 });
 
+console.log(jwtOptions);
 passport.use(jwtStrategy);
 
 module.exports = passport;

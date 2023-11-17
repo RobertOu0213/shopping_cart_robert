@@ -20,6 +20,7 @@ const userController = {
         req.flash("warning_messages", "密碼錯誤");
         return res.redirect("/users/login");
       }
+
       //token
       const payload = { id: user.id };
       const expiresIn = { expiresIn: "24h" };
@@ -27,6 +28,7 @@ const userController = {
       // 存入 session
       req.session.email = email;
       req.session.token = token;
+
       req.flash("success_messages", "登入成功");
       return res.redirect("/products");
     } catch {
