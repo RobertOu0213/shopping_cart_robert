@@ -6,6 +6,7 @@ const exphbs = require("express-handlebars");
 const path = require("path");
 const flash = require("connect-flash");
 const session = require("express-session");
+const passport = require("passport");
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
@@ -29,6 +30,9 @@ app.use((req, res, next) => {
   res.locals.warning_messages = req.flash("warning_messages"); // 設定 warning_msg 訊息
   return next();
 });
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(routes);
 
 app.listen(PORT, () => {
