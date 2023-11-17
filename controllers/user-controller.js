@@ -4,7 +4,8 @@ const jwt = require("jsonwebtoken");
 
 const userController = {
   loginPage: (req, res) => {
-    res.render("login");
+    const front = true;
+    return res.render("login", { front });
   },
   login: async (req, res) => {
     try {
