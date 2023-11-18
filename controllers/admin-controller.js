@@ -1,4 +1,5 @@
 const { Product } = require("../models");
+const { localFileHandler } = require("../helpers/file.helpers");
 
 const adminController = {
   getProducts: async (req, res) => {
@@ -9,7 +10,23 @@ const adminController = {
       (err) => console.log(err);
     }
   },
-  createProducts: (req, res) => {},
+  createProducts: async (req, res) => {
+    try {
+      const { name, price, image, description } = req.body;
+      const { file } = req;
+      const filePath = await localFileHandler(file);
+      await Product.create({
+        name,
+        price,
+        image: filePath || null,
+        description,
+      });
+      req.flash("success_messages", "產品新增成功");
+      res.redirect("/admin/products");
+    } catch {
+      (err) => console.log(err);
+    }
+  },
   loginPage: (req, res) => {
     return res.render("login");
   },
