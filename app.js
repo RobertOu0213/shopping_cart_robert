@@ -11,7 +11,10 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
-app.engine("handlebars", exphbs.engine());
+app.engine(
+  "handlebars",
+  exphbs.engine({ helpers: require("./helpers/handlebars-helpers") })
+);
 app.set("view engine", "handlebars");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
@@ -23,14 +26,17 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+// app.use((req, res, next) => {
+//   if (req.session.token) {
+//     req.headers.authorization = `Bearer ${req.session.token}`;
+//     return next();
+//   }
+//   return next();
+// });
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
-app.use((req, res, next) => {
-  if (req.session.token) {
-    req.headers.authorization = `Bearer ${req.session.token}`;
-    return next();
-  }
-  return next();
-});
 app.use((req, res, next) => {
   res.locals.success_messages = req.flash("success_messages"); // 設定 success_msg 訊息
   res.locals.error_messages = req.flash("error_messages"); // 設定 error_msg 訊息
@@ -38,9 +44,6 @@ app.use((req, res, next) => {
   res.locals.user = req.user;
   next();
 });
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use(routes);
 

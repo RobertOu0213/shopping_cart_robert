@@ -1,30 +1,48 @@
 const passport = require("passport");
-const passportJWT = require("passport-jwt");
-const ExtractJwt = passportJWT.ExtractJwt;
-const JwtStrategy = passportJWT.Strategy;
+const LocalStrategy = require("passport-local");
+const bcrypt = require("bcryptjs");
 const db = require("../models");
 const User = db.User;
-
-
-const jwtOptions = {};
-jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = "test2";
-jwtOptions.passReqToCallback = true;
-
-const jwtStrategy = new JwtStrategy(jwtOptions, async (req, payload, cb) => {
-  try {
-    const user = await User.findByPk(payload.id);
-    if (!user) {
-      return cb(null, false);
+// set up Passport strategy
+passport.use(
+  new LocalStrategy(
+    // customize user field
+    {
+      usernameField: "email",
+      passwordField: "password",
+      passReqToCallback: true,
+    },
+    // authenticate user
+    (req, email, password, cb) => {
+      User.findOne({ where: { email } }).then((user) => {
+        if (!user)
+          return cb(
+            null,
+            false,
+            req.flash("error_messages", "帳號或密碼輸入錯誤！")
+          );
+        bcrypt.compare(password, user.password).then((res) => {
+          if (!res)
+            return cb(
+              null,
+              false,
+              req.flash("error_messages", "帳號或密碼輸入錯誤！")
+            );
+          return cb(null, user);
+        });
+      });
     }
-    req.user = user.toJSON();
-    return cb(null, user);
-  } catch (err) {
-    console.log(err);
-  }
+  )
+);
+// serialize and deserialize user
+passport.serializeUser((user, cb) => {
+  cb(null, user.id);
 });
-
-console.log(jwtOptions);
-passport.use(jwtStrategy);
-
+passport.deserializeUser((id, cb) => {
+  User.findByPk(id).then((user) => {
+    user = user.toJSON();
+    console.log(user);
+    return cb(null, user);
+  });
+});
 module.exports = passport;

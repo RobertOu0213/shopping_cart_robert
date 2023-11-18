@@ -1,19 +1,19 @@
 <nav class="navbar">
   <div class="container-fluid d-flex">
-    {{#if isAuthenticated}}
-      {{!-- {{#equal user.role "admin"}} --}}
+    {{#if user}}
+      {{#equal user.role "admin"}}
       <h1>
-        <a class="navbar-brand" href="/products">好好吃!!!!!</a>
+        <a class="navbar-brand" href="/products">好好吃後台</a>
       </h1>
       <div class="d-flex">
         <span class="navbar-user mr-3">{{user.email}}</span>
         <a href="/admin/logout" class="btn btn-custom">登出</a>
       </div>
-      {{!-- {{/equal}}
+      {{/equal}}
 
       {{#equal user.role "user"}}
         <h1>
-          <a class="navbar-brand" href="/products">好好吃</a>
+          <a class="navbar-brand" href="/products">好好吃登入</a>
         </h1>
         <div class="d-flex">
           <span class="navbar-user mr-3">{{user.email}}</span>
@@ -25,10 +25,10 @@
           </a>
           <a href="/users/logout" class="btn btn-custom">登出</a>
         </div>
-      {{/equal}} --}}
-    {{else}}
+      {{/equal}}
+      {{else}}
       <h1>
-        <a class="navbar-brand" href="/products">好好吃!</a>
+        <a class="navbar-brand" href="/products">好好吃</a>
       </h1>
       <div class="d-flex">
         <a href="/cart" class="icon mr-3">
@@ -39,3 +39,4 @@
     {{/if}}
   </div>
 </nav>
+
