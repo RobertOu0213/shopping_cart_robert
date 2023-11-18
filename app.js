@@ -7,6 +7,7 @@ const path = require("path");
 const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("./config/passport");
+const methodOverride = require("method-override");
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
@@ -18,6 +19,7 @@ app.engine(
 app.set("view engine", "handlebars");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 
 app.use(
   session({

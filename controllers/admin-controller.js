@@ -1,8 +1,13 @@
-const { product } = require("db");
+const { Product } = require("../models");
 
 const adminController = {
-  getProducts: (req, res) => {
-    return res.render("admin/products");
+  getProducts: async (req, res) => {
+    try {
+      const products = await Product.findAll({ raw: true, nest: true });
+      return res.render("admin/products", { products });
+    } catch {
+      (err) => console.log(err);
+    }
   },
   createProducts: (req, res) => {},
   loginPage: (req, res) => {
