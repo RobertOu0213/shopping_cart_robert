@@ -1,7 +1,7 @@
 const productController = {
   getProducts: (req, res) => {
-    return res.render("products");
-  },
-};
+    return res.render('products')
+  }
+}
 
-module.exports = productController;
+module.exports = productController

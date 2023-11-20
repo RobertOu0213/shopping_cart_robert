@@ -62,7 +62,7 @@
                     <td class="text-center align-middle">
                         <a href="/admin/products/{{this.id}}" class="btn btn-success">編輯</a>
                         <form action="/admin/products/{{this.id}}?_method=DELETE" method="POST" class="d-inline">
-                            <button type="submit" class="btn btn-danger" onclick="return confirmDelete()">刪除</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm(`確定要刪除{{this.name}}嗎?`)">刪除</button>
                         </form>
                     </td>
                 </tr>

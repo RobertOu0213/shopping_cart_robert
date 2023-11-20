@@ -1,11 +1,11 @@
-const bcrypt = require("bcryptjs");
-const { User } = require("../models");
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs')
+const { User } = require('../models')
+const jwt = require('jsonwebtoken')
 
 const userController = {
   loginPage: (req, res) => {
-    const front = true;
-    return res.render("login", { front });
+    const front = true
+    return res.render('login', { front })
   },
   login: async (req, res) => {
     try {
@@ -29,51 +29,49 @@ const userController = {
       // req.session.email = email;
       // req.session.token = token;
 
-      req.flash("success_messages", "登入成功");
-      return res.redirect("/products");
+      req.flash('success_messages', '登入成功')
+      return res.redirect('/products')
     } catch {
-      (err) => console.log(err);
+      err => console.log(err)
     }
   },
-  registerPage: (req, res) => {
-    res.render("register");
-  },
+  registerPage: (req, res) => { res.render('register') },
   register: async (req, res, next) => {
     try {
-      const { email, password, confirmPassword } = req.body;
-      const user = await User.findOne({ where: { email } });
-      const salt = await bcrypt.genSaltSync(10);
-      const hash = await bcrypt.hashSync(password, salt); ////密碼加密
+      const { email, password, confirmPassword } = req.body
+      const user = await User.findOne({ where: { email } })
+      const salt = await bcrypt.genSaltSync(10)
+      const hash = await bcrypt.hashSync(password, salt) /// /密碼加密
 
       if (!email || !password || !confirmPassword) {
-        req.flash("error_messages", "全部欄位都需填寫");
-        return res.redirect("back");
+        req.flash('error_messages', '全部欄位都需填寫')
+        return res.redirect('back')
       }
       if (password !== confirmPassword) {
-        req.flash("error_messages", "密碼不相同");
-        return res.redirect("back");
+        req.flash('error_messages', '密碼不相同')
+        return res.redirect('back')
       }
       if (user) {
-        req.flash("error_messages", "帳號註冊過了");
-        return res.redirect("back");
+        req.flash('error_messages', '帳號註冊過了')
+        return res.redirect('back')
       }
 
       await User.create({
         email,
         password: hash,
-        role: "user",
-      });
-      req.flash("success_messages", "註冊成功");
-      return res.redirect("/users/login");
+        role: 'user'
+      })
+      req.flash('success_messages', '註冊成功')
+      return res.redirect('/users/login')
     } catch {
-      (err) => console.log(err);
+      err => console.log(err)
     }
   },
   logout: (req, res) => {
-    req.flash("success_messages", "登出成功！");
-    req.logout();
-    res.redirect("/users/login");
-  },
-};
+    req.flash('success_messages', '登出成功！')
+    req.logout()
+    res.redirect('/users/login')
+  }
+}
 
-module.exports = userController;
+module.exports = userController
