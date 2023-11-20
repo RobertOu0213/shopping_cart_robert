@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const adminController = require("../../controllers/admin-controller");
 const passport = require("../../config/passport");
-const upload = require('../../middleware/multer')
+const upload = require("../../middleware/multer");
 
 router.get("/login", adminController.loginPage);
 router.post(
@@ -15,11 +15,14 @@ router.post(
 );
 router.get("/logout", adminController.logout);
 
+router.get("/products/:id", adminController.getProduct);
 router.get("/products", adminController.getProducts);
-router.post(
-  "/products",
+router.post("/products", upload.single("image"), adminController.postProducts);
+
+router.put(
+  "/products/:id",
   upload.single("image"),
-  adminController.createProducts
+  adminController.putProducts
 );
 
 router.use("/", (req, res) => res.redirect("/admin/products"));
