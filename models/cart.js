@@ -4,24 +4,19 @@ module.exports = (sequelize, DataTypes) => {
   class Cart extends Model {
     static associate (models) {
       Cart.belongsToMany(models.Product, {
+        as: 'items',
         through: {
-          model: models.CartItem,
-          unique: false
+          model: models.CartItem, unique: false
         },
-        foreignKey: 'cartId',
-        as: 'cartProducts'
+        foreignKey: 'CartId'
       })
     }
   }
-  Cart.init(
-    {
-      userId: DataTypes.INTEGER
-    },
-    {
-      sequelize,
-      modelName: 'Cart',
-      underscored: true
-    }
-  )
+  Cart.init({
+    UserId: DataTypes.INTEGER
+  }, {
+    sequelize,
+    modelName: 'Cart'
+  })
   return Cart
 }

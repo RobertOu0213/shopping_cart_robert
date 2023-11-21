@@ -4,22 +4,18 @@ module.exports = (sequelize, DataTypes) => {
   class CartItem extends Model {
     static associate (models) {}
   }
-  CartItem.init(
-    {
-      id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-      },
-      cartId: DataTypes.INTEGER,
-      productId: DataTypes.INTEGER,
-      quantity: DataTypes.INTEGER
+  CartItem.init({
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
     },
-    {
-      sequelize,
-      modelName: 'CartItem',
-      underscored: true
-    }
-  )
+    CartId: DataTypes.INTEGER,
+    ProductId: DataTypes.INTEGER,
+    quantity: DataTypes.INTEGER
+  }, {
+    sequelize,
+    modelName: 'CartItem'
+  })
   return CartItem
 }

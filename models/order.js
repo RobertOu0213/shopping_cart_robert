@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
           model: models.OrderItem,
           unique: false
         },
-        foreignKey: 'OrderId',
+        foreignKey: 'orderId',
         as: 'orderProducts'
       })
       Order.belongsTo(models.User)

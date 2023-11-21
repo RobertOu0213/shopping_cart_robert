@@ -10,14 +10,14 @@ module.exports = (sequelize, DataTypes) => {
         through: {
           model: models.CartItem, unique: false
         },
-        foreignKey: 'productId'
+        foreignKey: 'ProductId'
       })
       Product.belongsToMany(models.Order, {
         as: 'orders',
         through: {
           model: models.OrderItem, unique: false
         },
-        foreignKey: 'productId'
+        foreignKey: 'ProductId'
       })
     }
   };
