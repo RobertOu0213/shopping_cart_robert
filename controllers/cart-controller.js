@@ -69,6 +69,16 @@ const cartController = {
       await cartItem.update({ quantity: cartItem.quantity - 1 >= 1 ? cartItem.quantity - 1 : 1 })
       return res.redirect('back')
     } catch (err) { console.log(err) }
+  },
+  deleteCart: async (req, res) => {
+    try {
+      const id = req.params.id
+      const cartItem = await CartItem.findByPk(id)
+      await cartItem.destroy()
+      return res.redirect('back')
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
 
