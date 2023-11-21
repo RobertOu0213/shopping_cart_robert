@@ -43,11 +43,11 @@
                 </td>
                 <td class="align-middle">
                     <div class="d-flex justify-content-center align-items-center">
-                        <form action="/cartItem/{{this.CartItem.id}}/add" method="POST">
+                        <form action="/cart/{{this.CartItem.id}}/add" method="POST">
                             <button type="submit" class="btn btn-sm btn-outline-secondary">+</button>
                         </form>
                         <span class="mx-3">{{this.CartItem.quantity}}</span>
-                        <form action="/cartItem/{{this.CartItem.id}}/sub" method="POST">
+                        <form action="/cart/{{this.CartItem.id}}/sub" method="POST">
                             <button type="submit" class="btn btn-sm btn-outline-secondary">-</button>
                         </form>
                     </div>
