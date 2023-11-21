@@ -15,6 +15,7 @@ if (process.env.NODE_ENV !== 'production') {
 app.engine('handlebars', exphbs.engine({ helpers: require('./helpers/handlebars-helpers') }))
 app.set('view engine', 'handlebars')
 app.use(express.static(path.join(__dirname, 'public')))
+// app.use(express.static('public'))
 app.use('/upload', express.static(path.join(__dirname, 'upload')))
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))

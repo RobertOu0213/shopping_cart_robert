@@ -63,8 +63,8 @@ const userController = {
       })
       req.flash('success_messages', '註冊成功')
       return res.redirect('/users/login')
-    } catch {
-      err => console.log(err)
+    } catch (err) {
+      console.log(err)
     }
   },
   logout: (req, res) => {

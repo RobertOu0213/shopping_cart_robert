@@ -7,13 +7,13 @@ const adminController = {
       const products = await Product.findAll({ raw: true, nest: true })
 
       return res.render('admin/products', { products })
-    } catch {
-      err => console.log(err)
+    } catch (err) {
+      console.log(err)
     }
   },
   postProducts: async (req, res) => {
     try {
-      const { name, price, image, description } = req.body
+      const { name, price, description } = req.body
       const { file } = req
       const filePath = await localFileHandler(file)
       await Product.create({
@@ -24,8 +24,8 @@ const adminController = {
       })
       req.flash('success_messages', '產品新增成功')
       res.redirect('/admin/products')
-    } catch {
-      err => console.log(err)
+    } catch (err) {
+      console.log(err)
     }
   },
   getProduct: async (req, res) => {
@@ -42,8 +42,8 @@ const adminController = {
         products,
         status
       })
-    } catch {
-      err => console.log(err)
+    } catch (err) {
+      console.log(err)
     }
   },
   putProducts: async (req, res) => {
@@ -62,8 +62,8 @@ const adminController = {
       })
       req.flash('success_messages', '商品修改成功')
       res.redirect('/admin/products')
-    } catch {
-      err => console.log(err)
+    } catch (err) {
+      console.log(err)
     }
   },
   deleteProduct: async (req, res) => {
@@ -72,8 +72,8 @@ const adminController = {
       const product = await Product.findByPk(id)
       await product.destroy()
       return res.redirect('back')
-    } catch {
-      err => console.log(err)
+    } catch (err) {
+      console.log(err)
     }
   },
   loginPage: (req, res) => {

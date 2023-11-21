@@ -1,18 +1,18 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Order extends Model {
-    static associate(models) {
+    static associate (models) {
       Order.belongsToMany(models.Product, {
         through: {
           model: models.OrderItem,
-          unique: false,
+          unique: false
         },
-        foreignKey: "OrderId",
-        as: "orderProducts",
-      });
-      Order.belongsTo(models.User);
-      Order.hasMany(models.Payment);
+        foreignKey: 'OrderId',
+        as: 'orderProducts'
+      })
+      Order.belongsTo(models.User)
+      Order.hasMany(models.Payment)
     }
   }
   Order.init(
@@ -24,13 +24,13 @@ module.exports = (sequelize, DataTypes) => {
       sn: DataTypes.STRING,
       amount: DataTypes.INTEGER,
       shippingStatus: DataTypes.STRING,
-      paymentStatus: DataTypes.STRING,
+      paymentStatus: DataTypes.STRING
     },
     {
       sequelize,
-      modelName: "Order",
-      underscored: true,
+      modelName: 'Order',
+      underscored: true
     }
-  );
-  return Order;
-};
+  )
+  return Order
+}
