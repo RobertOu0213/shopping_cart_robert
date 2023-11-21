@@ -1,3 +1,12 @@
+/* 變數 */
+:root {
+    --primary: #73c0f4;
+    --secondary: #f3e4c6;
+    --dark: #000;
+    --light: #fff;
+    --bg: #e6eff3;
+}
+
 html,
 body {
   box-sizing: border-box;
@@ -22,4 +31,20 @@ body {
 
 .btn-custom:hover {
   background: #f3e4c6;
+}
+
+/* 購物車 */
+.step {
+    border:1px solid var(--primary);
+    border-radius:30px;
+    padding:8px 12px;
+    color: var(--dark);
+}
+.step-now {
+    background-color: var(--primary);
+}
+.line {
+    border-top:1px solid var(--primary);
+    margin-top: 10px;
+    width: 300px;
 }
