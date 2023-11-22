@@ -31,8 +31,8 @@ const userController = {
 
       req.flash('success_messages', '登入成功')
       return res.redirect('/products')
-    } catch {
-      err => console.log(err)
+    } catch (err) {
+      console.log(err)
     }
   },
   registerPage: (req, res) => { res.render('register') },
@@ -68,8 +68,9 @@ const userController = {
     }
   },
   logout: (req, res) => {
-    req.flash('success_messages', '登出成功！')
     req.logout()
+    req.session.cartId = ''
+    req.flash('success_messages', '登出成功！')
     res.redirect('/users/login')
   }
 }
