@@ -48,3 +48,14 @@ body {
     margin-top: 10px;
     width: 300px;
 }
+
+/* sidebar */
+.sidebar {
+  /* outline: 1px solid blue; */
+  position:fixed;
+  right:10px;
+  top: 50%;
+  width:70px;
+  background-color: #ff6600;
+  color: green;
+}

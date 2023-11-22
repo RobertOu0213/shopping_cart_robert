@@ -13,7 +13,6 @@ const cartController = {
       let cart = await Cart.findOne({ where: { UserId }, include: 'items' })
       if (!cart) res.render('cart')
       cart = cart.toJSON()
-      console.log(cart.items)
       const totalPrice = cart.items.length > 0 ? cart.items.map(d => d.price * d.CartItem.quantity).reduce((a, b) => a + b) : 0
 
       res.render('cart', { cart, totalPrice })
