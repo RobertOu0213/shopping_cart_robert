@@ -8,9 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
-        type: Sequelize.INTEGER
-      },
       name: {
         type: Sequelize.STRING
       },
@@ -20,11 +17,11 @@ module.exports = {
       address: {
         type: Sequelize.STRING
       },
-      sn: {
-        type: Sequelize.STRING
-      },
       amount: {
         type: Sequelize.INTEGER
+      },
+      sn: {
+        type: Sequelize.STRING
       },
       shipping_status: {
         type: Sequelize.STRING
@@ -32,11 +29,14 @@ module.exports = {
       payment_status: {
         type: Sequelize.STRING
       },
-      created_at: {
+      UserId: {
+        type: Sequelize.INTEGER
+      },
+      createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updated_at: {
+      updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
       }

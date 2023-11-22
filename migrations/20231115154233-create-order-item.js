@@ -8,10 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      order_id: {
+      OrderId: {
         type: Sequelize.INTEGER
       },
-      product_id: {
+      ProductId: {
         type: Sequelize.INTEGER
       },
       price: {
@@ -20,11 +20,11 @@ module.exports = {
       quantity: {
         type: Sequelize.INTEGER
       },
-      created_at: {
+      createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updated_at: {
+      updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
       }
