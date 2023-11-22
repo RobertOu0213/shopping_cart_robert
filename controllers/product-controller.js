@@ -1,5 +1,9 @@
 const { Product, Cart, CartItem } = require('../models')
 const productController = {
+  // getProducts: async (req, res) => {
+  //   const products = await Product.findAll({ raw: true, nest: true })
+  //   res.render('products', { products })
+  // }
   getProducts: async (req, res) => {
     try {
       const products = await Product.findAll({ raw: true, nest: true })
@@ -31,7 +35,7 @@ const productController = {
           }
         } else {
           if (!cart) {
-            // 更新使用者購物車
+          // 更新使用者購物車
             await Cart.update(
               { UserId: req.user.id },
               { where: { id: req.session.cartId } }
@@ -44,11 +48,15 @@ const productController = {
             const totalPrice = userCart.items.length > 0 ? userCart.items.map(d => d.price * d.CartItem.quantity).reduce((a, b) => a + b) : 0
             return res.render('products', { products, cart: userCart, totalPrice })
           } else {
-            // 更新購物車 id
+          // 更新購物車 id
             await CartItem.update(
               { CartId: cart.id },
               { where: { CartId: req.session.cartId } }
             )
+            let userCart = await Cart.findByPk(cart.id, { include: 'items' })
+            userCart = userCart.toJSON()
+            const totalPrice = userCart.items.length > 0 ? userCart.items.map(d => d.price * d.CartItem.quantity).reduce((a, b) => a + b) : 0
+            return res.render('products', { products, cart: userCart, totalPrice })
           }
         }
       }
