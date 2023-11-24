@@ -60,6 +60,19 @@ const orderController = {
     } catch (err) {
       console.log(err)
     }
+  },
+  cancelOrder: async (req, res) => {
+    try {
+      const id = req.params.id
+      const order = await Order.findByPk(id)
+      await order.update({
+        ...req.body,
+        shippingStatus: '-1',
+        paymentStatus: '-1'
+      })
+      req.flash('success_messages', '成功取消訂單')
+      return res.redirect('back')
+    } catch (err) { console.log(err) }
   }
 }
 

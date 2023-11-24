@@ -5,5 +5,6 @@ const orderController = require('../../controllers/order-controller')
 router.get('/data', orderController.fillOrder)
 router.post('/data', orderController.postOrder)
 router.get('/:id', orderController.getOrder)
+router.post('/:id/cancel', orderController.cancelOrder)
 
 module.exports = router
