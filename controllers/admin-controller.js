@@ -1,4 +1,4 @@
-const { Product } = require('../models')
+const { Product, Order } = require('../models')
 const { localFileHandler } = require('../helpers/file.helpers')
 
 const adminController = {
@@ -86,6 +86,11 @@ const adminController = {
     req.flash('success_messages', '登出成功！')
     req.logout()
     res.redirect('/admin/login')
+  },
+  getOrders: async (req, res) => {
+    const orders = await Order.findAll({ raw: true, nest: true })
+    console.log(orders)
+    return res.render('admin/orders', { orders })
   }
 }
 module.exports = adminController
