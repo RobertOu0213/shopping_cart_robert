@@ -36,7 +36,6 @@ const adminController = {
         Product.findByPk(id),
         Product.findAll({ raw: true, nest: true })
       ])
-      console.log(product)
       return res.render('admin/products', {
         product: product.toJSON(),
         products,

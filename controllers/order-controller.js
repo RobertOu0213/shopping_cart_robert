@@ -4,13 +4,15 @@ const orderController = {
   fillOrder: async (req, res) => {
     try {
       const UserId = req.user.id
-      const cart = await Cart.findOne({ where: { UserId }, include: 'items', raw: true, nest: true })
+      let cart = await Cart.findOne({ where: { UserId }, include: 'items' })
+      cart = cart.toJSON()
       // if (!cart || !cart.items.length) {
       //   req.flash('warning_messsags', '購物車是空的!')
       //   return res.redirect('/cart')
       // }
       const cartId = cart.id
       const amount = cart.items.length > 0 ? cart.items.map(d => d.price * d.CartItem.quantity).reduce((a, b) => a + b) : 0
+
       res.render('orderInfo', { cartId, amount })
     } catch (err) {
       console.log(err)
@@ -26,6 +28,7 @@ const orderController = {
         ...req.body,
         UserId: req.user.id
       })
+      console.log(order)
       order = order.toJSON()
 
       const items = Array.from({ length: cart.items.length })
@@ -42,7 +45,18 @@ const orderController = {
 
       await cart.destroy()
       req.session.cartId = ''
-      // return res.redirect(`/order/${order.id}`)
+      return res.redirect(`/order/${order.id}`)
+    } catch (err) {
+      console.log(err)
+    }
+  },
+  getOrder: async (req, res) => {
+    try {
+      const id = req.params.id
+      const paidOrder = true
+      let order = await Order.findByPk(id, { include: 'orderProducts' })
+      order = order.toJSON()
+      res.render('order', { order, paidOrder })
     } catch (err) {
       console.log(err)
     }

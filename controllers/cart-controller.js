@@ -48,7 +48,7 @@ const cartController = {
       if (!created) product.quantity += 1
       await product.save()
       req.session.cartId = cart.id
-      console.log(req.session.cartId)
+      // console.log(req.session.cartId)
       return res.redirect('back')
     } catch (err) {
       console.log(err)
