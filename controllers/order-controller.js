@@ -4,12 +4,11 @@ const orderController = {
   fillOrder: async (req, res) => {
     try {
       const UserId = req.user.id
-      let cart = await Cart.findOne({ where: { UserId }, include: 'items' })
-      cart = cart.toJSON()
-      // if (!cart || !cart.items.length) {
-      //   req.flash('warning_messsags', '購物車是空的!')
-      //   return res.redirect('/cart')
-      // }
+      const cart = await Cart.findOne({ where: { UserId }, include: 'items' })
+      if (!cart || !cart.items.length) {
+        req.flash('warning_messages', '購物車是空的!')
+        return res.redirect('/cart')
+      }
       const cartId = cart.id
       const amount = cart.items.length > 0 ? cart.items.map(d => d.price * d.CartItem.quantity).reduce((a, b) => a + b) : 0
 
