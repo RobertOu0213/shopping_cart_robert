@@ -77,7 +77,29 @@ const orderController = {
       req.flash('success_messages', '成功取消訂單')
       return res.redirect('back')
     } catch (err) { console.log(err) }
+  },
+  getOrders: async (req, res) => {
+    try {
+      const ordersHavingProducts = await Order.findAll({
+        raw: true,
+        nest: true,
+        where: { UserId: req.user.id },
+        include: 'orderProducts'
+      })
+
+      const orders = await Order.findAll({ where: { UserId: req.user.id }, raw: true, nest: true })
+      orders.forEach(order => { order.items = [] })
+
+      ordersHavingProducts.forEach(product => {
+        const index = orders.findIndex(order => order.id === product.id)
+        if (index === -1) return
+        orders[index].items.push(product.orderProducts)
+      })
+
+      res.render('orders', { orders })
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
-
 module.exports = orderController
