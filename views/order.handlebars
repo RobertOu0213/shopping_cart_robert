@@ -64,8 +64,8 @@
                         {{#equal order.paymentStatus '-1'}}已取消{{/equal}}
                     </div>
                 </div>
-                {{!-- {{#if paidOrder}}
-                {{else}} --}}
+                {{#if paidOrder}}
+                {{else}}
                     <div class="d-flex">
                         <form name="Newebpay" action="" method="POST" class="d-inline">
                           <button type="submit" class="btn btn-outline-custom">前往付款</button>
@@ -74,7 +74,7 @@
                             <button type="submit" class="btn btn-outline-custom ml-3" onclick="return confirm(`確定要取消訂單嗎?`)">取消訂單</button>
                         </form>
                     </div>
-                {{!-- {{/if}} --}}
+                {{/if}}
             </div>
         </li>
     </ul>

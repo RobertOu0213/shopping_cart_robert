@@ -53,10 +53,14 @@ const orderController = {
   getOrder: async (req, res) => {
     try {
       const id = req.params.id
-      const paidOrder = true
       let order = await Order.findByPk(id, { include: 'orderProducts' })
       order = order.toJSON()
-      res.render('order', { order, paidOrder })
+      if (order.paymentStatus === '0') {
+        res.render('order', { order })
+      } else {
+        const paidOrder = true
+        res.render('order', { order, paidOrder })
+      }
     } catch (err) {
       console.log(err)
     }
