@@ -91,6 +91,13 @@ const adminController = {
     const orders = await Order.findAll({ raw: true, nest: true })
     console.log(orders)
     return res.render('admin/orders', { orders })
+  },
+  getOrder: async (req, res) => {
+    const id = req.params.id
+    let order = await Order.findByPk(id, { include: 'orderProducts' })
+    order = order.toJSON()
+
+    return res.render('admin/order', { order })
   }
 }
 module.exports = adminController
