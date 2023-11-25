@@ -17,6 +17,8 @@ router.delete('/products/:id', adminController.deleteProduct)
 router.get('/orders/:id', adminController.getOrder)
 router.get('/orders', adminController.getOrders)
 router.post('/orders/:id/ship', adminController.shipOrder)
+router.post('/orders/:id/cancel', adminController.cancelOrder)
+router.post('/orders/:id/recover', adminController.recoverOrder)
 
 router.use('/', (req, res) => res.redirect('/admin/products'))
 

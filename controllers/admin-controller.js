@@ -109,6 +109,22 @@ const adminController = {
     } catch (err) {
       console.log(err)
     }
+  },
+  cancelOrder: async (req, res) => {
+    try {
+      const id = req.params.id
+      const order = await Order.findByPk(id)
+      await order.update({ shippingStatus: -1 })
+      return res.redirect('back')
+    } catch (err) { console.log(err) }
+  },
+  recoverOrder: async (req, res) => {
+    try {
+      const id = req.params.id
+      const order = await Order.findByPk(id)
+      await order.update({ shippingStatus: 0 })
+      return res.redirect('back')
+    } catch (err) { console.log(err) }
   }
 }
 module.exports = adminController
