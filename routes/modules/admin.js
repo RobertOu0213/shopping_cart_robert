@@ -14,8 +14,9 @@ router.post('/products', upload.single('image'), adminController.postProducts)
 router.put('/products/:id', upload.single('image'), adminController.putProducts)
 router.delete('/products/:id', adminController.deleteProduct)
 
-router.get('/orders', adminController.getOrders)
 router.get('/orders/:id', adminController.getOrder)
+router.get('/orders', adminController.getOrders)
+router.post('/orders/:id/ship', adminController.shipOrder)
 
 router.use('/', (req, res) => res.redirect('/admin/products'))
 

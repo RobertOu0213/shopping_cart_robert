@@ -93,11 +93,22 @@ const adminController = {
     return res.render('admin/orders', { orders })
   },
   getOrder: async (req, res) => {
-    const id = req.params.id
-    let order = await Order.findByPk(id, { include: 'orderProducts' })
-    order = order.toJSON()
-
-    return res.render('admin/order', { order })
+    try {
+      const id = req.params.id
+      let order = await Order.findByPk(id, { include: 'orderProducts' })
+      order = order.toJSON()
+      return res.render('admin/order', { order })
+    } catch (err) { console.log(err) }
+  },
+  shipOrder: async (req, res) => {
+    try {
+      const id = req.params.id
+      const order = await Order.findByPk(id)
+      await order.update({ shippingStatus: '1' })
+      res.redirect('back')
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
 module.exports = adminController

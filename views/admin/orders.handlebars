@@ -39,7 +39,7 @@
                     <td class="text-center align-middle">
                         <a href="/admin/orders/{{this.id}}" class="btn btn-info">詳細內容</a>
                         <form action="/admin/orders/{{this.id}}/ship" method="POST" class="d-inline">
-                            <button type="submit" class="btn btn-success" onclick="return confirmShip()"
+                            <button type="submit" class="btn btn-success" onclick="return confirm(`確定要出貨嗎?`)"
                                 {{#equal this.shippingStatus '1'}}disabled{{/equal}}
                                 {{#equal this.shippingStatus '-1'}}disabled{{/equal}}
                             >訂單出貨</button>
