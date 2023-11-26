@@ -1,4 +1,4 @@
-const { Product, Order } = require('../models')
+const { Product, Order, User } = require('../models')
 const { localFileHandler } = require('../helpers/file.helpers')
 
 const adminController = {
@@ -124,6 +124,14 @@ const adminController = {
       const order = await Order.findByPk(id)
       await order.update({ shippingStatus: 0 })
       return res.redirect('back')
+    } catch (err) { console.log(err) }
+  },
+  authority: async (req, res) => {
+    try {
+      const users = await User.findAll({ raw: true, nest: true })
+      const user = req.user
+      console.log(users)
+      return res.render('admin/users', { users, user })
     } catch (err) { console.log(err) }
   }
 }
