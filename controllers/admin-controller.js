@@ -126,12 +126,18 @@ const adminController = {
       return res.redirect('back')
     } catch (err) { console.log(err) }
   },
-  authority: async (req, res) => {
+  getAuthority: async (req, res) => {
     try {
       const users = await User.findAll({ raw: true, nest: true })
-      const user = req.user
-      console.log(users)
-      return res.render('admin/users', { users, user })
+      return res.render('admin/users', { users })
+    } catch (err) { console.log(err) }
+  },
+  changeAuth: async (req, res) => {
+    try {
+      const id = req.params.id
+      const user = await User.findByPk(id)
+      user.role === 'admin' ? await user.update({ role: 'user' }) : await user.update({ role: 'admin' })
+      return res.redirect('back')
     } catch (err) { console.log(err) }
   }
 }

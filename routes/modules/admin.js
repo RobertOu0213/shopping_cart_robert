@@ -20,7 +20,8 @@ router.post('/orders/:id/ship', adminController.shipOrder)
 router.post('/orders/:id/cancel', adminController.cancelOrder)
 router.post('/orders/:id/recover', adminController.recoverOrder)
 
-router.get('/authority', adminController.authority)
+router.get('/authority', adminController.getAuthority)
+router.post('/authority/:id', adminController.changeAuth)
 router.use('/', (req, res) => res.redirect('/admin/products'))
 
 module.exports = router
