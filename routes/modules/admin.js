@@ -1,12 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const adminController = require('../../controllers/admin-controller')
-const passport = require('../../config/passport')
 const upload = require('../../middleware/multer')
 const { authenticatedAdmin } = require('../../middleware/auth')
 
-router.get('/login', adminController.loginPage)
-router.post('/login', passport.authenticate('local', { failureRedirect: '/admin/login', failureFlash: true }), adminController.login)
 router.get('/logout', adminController.logout)
 
 router.get('/products/:id', authenticatedAdmin, adminController.getProduct)

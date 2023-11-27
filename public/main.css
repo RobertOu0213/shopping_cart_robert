@@ -16,6 +16,13 @@ body {
   height: 100%;
 }
 
+.backstage {
+  display: flex;
+  align-items: center;
+  color:#4169e1;
+  font-size:1.5rem;
+  text-decoration: none;
+}
 
 
 .btn-custom {
@@ -39,7 +46,7 @@ body {
 /* navbar */
 .navbar {
     background: #ff6b35;
-    padding: 15px 30px;
+    padding: 10px 30px;
 }
 
 .navbar .navbar-brand {

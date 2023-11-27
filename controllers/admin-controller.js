@@ -75,17 +75,10 @@ const adminController = {
       console.log(err)
     }
   },
-  loginPage: (req, res) => {
-    return res.render('login')
-  },
-  login: (req, res) => {
-    req.flash('success_messages', '登入成功')
-    return res.redirect('/admin/products')
-  },
   logout: (req, res) => {
     req.flash('success_messages', '登出成功！')
     req.logout()
-    res.redirect('/admin/login')
+    res.redirect('/users/login')
   },
   getOrders: async (req, res) => {
     const orders = await Order.findAll({ raw: true, nest: true })
