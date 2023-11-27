@@ -1,46 +1,55 @@
 <div class="" style="text-align: center">
-    <div class="col-md-9 m-auto mt-3">
-        <div class="row">
-            {{#each products}}
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img class="bd-placeholder-img card-img-top w-100" src={{this.image}} alt="{{this.name}}" height="225"/>
-                        <div class="card-body">
-                            <p class="card-text">
-                                <h4 class="title">{{this.name}}</h4>
-                                <p class="ellipsis">{{this.description}}</p>
-                                <h5 class="price text-center">$ {{this.price}}</h5>
-                            </p>
-                            <div class="d-flex justify-content-center align-items-center">
-                                <div class="btn-group">
-                                    <form action="/cart" method="POST">
-                                        <input type="hidden" name="productId" value="{{this.id}}">
-                                        <button type="submit" class="btn btn-outline-custom"><i class="fas fa-shopping-cart fa-1x mr-2"></i>加入購物車</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  <div class="col-md-9 m-auto mt-3">
+    <div class="row">
+      {{#each products}}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img
+              class="bd-placeholder-img card-img-top w-100"
+              src={{this.image}}
+              alt="{{this.name}}"
+              height="225"
+            />
+            <div class="card-body">
+              <p class="card-text">
+                <h4 class="title">{{this.name}}</h4>
+                <p class="ellipsis">{{this.description}}</p>
+                <h5 class="price text-center">$ {{this.price}}</h5>
+              </p>
+              <div class="d-flex justify-content-center align-items-center">
+                <div class="btn-group">
+                  <form action="/cart" method="POST">
+                    <input type="hidden" name="productId" value="{{this.id}}" />
+                    <button type="submit" class="btn btn-outline-custom"><i
+                        class="fas fa-shopping-cart fa-1x mr-2"
+                      ></i>加入購物車</button>
+                  </form>
                 </div>
-            {{/each}}
+              </div>
+            </div>
+          </div>
         </div>
-        <button id="test">click</button>
-        <div id="show"></div>
+      {{/each}}
     </div>
+    <button id="test">click</button>
+    <div id="show"></div>
+  </div>
 
-    <div class="sidebar" style="">
-        <a href="/cart" class="btn mt-3 w-100">
-        <div><i class="fas fa-shopping-cart fa-lg"></i></div>
-        <div class="mt-3">{{#if cart.items.length}}({{cart.items.length}}){{else}}(0){{/if}}</div>
-        <hr>
-        <div class="" style="font-size: 1em;">
-            共
-            <br>
-            {{#if totalPrice}}{{totalPrice}}{{/if}}
-            <br> 
-            元
-        </div>
-        </a>
-    </div>
-   
+  <div class="sidebar" style="">
+    <a href="/cart" class="btn mt-3 w-100">
+      <div><i class="fas fa-shopping-cart fa-lg"></i></div>
+      <div class="mt-3">{{#if
+          cart.items.length
+        }}({{cart.items.length}}){{else}}(0){{/if}}</div>
+      <hr />
+      <div class="" style="font-size: 1em;">
+        共
+        <br />
+        {{#if totalPrice}}{{totalPrice}}{{else}}0{{/if}}
+        <br />
+        元
+      </div>
+    </a>
+  </div>
+
 </div>

@@ -9,9 +9,11 @@ const { authenticated } = require('../middleware/auth')
 
 router.use('/admin', admin)
 router.use('/users', users)
-router.use('/cart', authenticated, cart)
+router.use('/cart', cart)
 router.use('/order', authenticated, order)
 router.get('/products', productController.getProducts)
-router.use('/', (req, res) => { res.redirect('/products') })
+router.use('/', (req, res) => {
+  res.redirect('/products')
+})
 
 module.exports = router

@@ -1,10 +1,10 @@
 /* 變數 */
 :root {
-    --primary: #73c0f4;
-    --secondary: #f3e4c6;
-    --dark: #000;
-    --light: #fff;
-    --bg: #e6eff3;
+  --primary: #73c0f4;
+  --secondary: #f3e4c6;
+  --dark: #000;
+  --light: #fff;
+  --bg: #e6eff3;
 }
 
 html,
@@ -16,14 +16,19 @@ body {
   height: 100%;
 }
 
+img {
+  width: 100% !important;
+  /*height: 100%;*/
+  object-fit: contain !important;
+}
+
 .backstage {
   display: flex;
   align-items: center;
-  color:#4169e1;
-  font-size:1.5rem;
+  color: #4169e1;
+  font-size: 1.5rem;
   text-decoration: none;
 }
-
 
 .btn-custom {
   display: inline-block;
@@ -40,69 +45,69 @@ body {
 
 .btn-custom:hover {
   background: #ff6b35;
-  color:#4169e1;
+  color: #4169e1;
 }
 
 /* navbar */
 .navbar {
-    background: #ff6b35;
-    padding: 10px 30px;
+  background: #ff6b35;
+  padding: 10px 30px;
 }
 
 .navbar .navbar-brand {
-    font-size: 2rem;
-    font-weight: 900;
-    color:#eef4ed;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #eef4ed;
 }
 
 .navbar .icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    text-decoration: none;
-    color:#4169e1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: #4169e1;
 }
 
 .navbar .navbar-user {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
 }
 
 /* footer */
 .footer {
-width: 100%;
+  width: 100%;
   /* position: absolute;
   bottom: 0; */
-/* flex-shrink: 0; */
-background-color:#ff6b35;
+  /* flex-shrink: 0; */
+  background-color: #ff6b35;
 }
 
 /* 購物車 */
 .step {
-    border:1px solid var(--primary);
-    border-radius:30px;
-    padding:8px 12px;
-    color: var(--dark);
+  border: 1px solid var(--primary);
+  border-radius: 30px;
+  padding: 8px 12px;
+  color: var(--dark);
 }
 .step-now {
-    background-color: var(--primary);
+  background-color: var(--primary);
 }
 .line {
-    border-top:1px solid var(--primary);
-    margin-top: 10px;
-    width: 300px;
+  border-top: 1px solid var(--primary);
+  margin-top: 10px;
+  width: 300px;
 }
 
 /* sidebar */
 .sidebar {
   /* outline: 1px solid blue; */
-  position:fixed;
-  right:10px;
+  position: fixed;
+  right: 10px;
   top: 50%;
-  width:70px;
+  width: 70px;
   background-color: #ff6600;
   color: green;
 }
