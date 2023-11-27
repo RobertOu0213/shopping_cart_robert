@@ -16,5 +16,6 @@ module.exports = {
   },
   formatTime: function (a) {
     return dayjs(a).locale('zh-tw').format('YYYY/MM/DD (dd) a HH:mm:ss')
-  }
+  },
+  currentYear: () => dayjs().year()
 }

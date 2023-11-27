@@ -64,6 +64,11 @@ body {
     font-size: 1.2rem;
 }
 
+/* footer */
+.footer {
+background-color:#eef4ed;
+}
+
 /* 購物車 */
 .step {
     border:1px solid var(--primary);
