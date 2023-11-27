@@ -13,14 +13,14 @@
 
       {{#equal user.role "user"}}
         <h1>
-          <a class="navbar-brand" href="/products">好好吃登入</a>
+          <a class="navbar-brand" href="/products">PLUS FOOD</a>
         </h1>
         <div class="d-flex">
-          <span class="navbar-user mr-3">{{user.email}}</span>
-          <a href="/order" class="icon mr-3">
+          <span class="navbar-user me-2">{{user.email}}</span>
+          <a href="/order" class="icon me-3">
             <i class="fas fa-list-alt fa-lg"></i>
           </a>
-          <a href="/cart" class="icon mr-3">
+          <a href="/cart" class="icon me-3">
             <i class="fas fa-shopping-cart fa-lg"></i>
           </a>
           <a href="/users/logout" class="btn btn-custom">登出</a>
@@ -28,10 +28,10 @@
       {{/equal}}
       {{else}}
       <h1>
-        <a class="navbar-brand" href="/products">好好吃</a>
+        <a class="navbar-brand" href="/products">PLUS FOOD</a>
       </h1>
       <div class="d-flex">
-        <a href="/cart" class="icon mr-3">
+        <a href="/cart" class="icon me-3">
           <i class="fas fa-shopping-cart fa-lg"></i>
         </a>
         <a href="/users/login" class="btn btn-custom">登入</a>

@@ -16,13 +16,15 @@ body {
   height: 100%;
 }
 
+
+
 .btn-custom {
   display: inline-block;
   padding: 10px 15px;
   font-size: 1.1rem;
   font-weight: 700;
-  color: #ffffff;
-  background: #ff6600;
+  color: #4169e1;
+  background: #eef4ed;
   border: none;
   outline: none;
   cursor: pointer;
@@ -30,7 +32,36 @@ body {
 }
 
 .btn-custom:hover {
-  background: #f3e4c6;
+  background: #ff6b35;
+  color:#4169e1;
+}
+
+/* navbar */
+.navbar {
+    background: #ff6b35;
+    padding: 15px 30px;
+}
+
+.navbar .navbar-brand {
+    font-size: 2rem;
+    font-weight: 900;
+    color:var(--light);
+}
+
+.navbar .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color:black
+}
+
+.navbar .navbar-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
 }
 
 /* 購物車 */
