@@ -9,8 +9,8 @@ module.exports = {
         description: '好吃',
         price: 135,
         image: '/faker/white-fries.jpg',
-        created_at: new Date(),
-        updated_at: new Date()
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         id: 2,
@@ -18,8 +18,8 @@ module.exports = {
         description: '很脆',
         price: 200,
         image: '/faker/Onion-rings.jpg',
-        created_at: new Date(),
-        updated_at: new Date()
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         id: 3,
@@ -27,8 +27,8 @@ module.exports = {
         description: '超級好吃',
         price: 100,
         image: '/faker/Potato-Wedges.jpg',
-        created_at: new Date(),
-        updated_at: new Date()
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         id: 4,
@@ -36,8 +36,8 @@ module.exports = {
         description: '超級好吃的',
         price: 150,
         image: '/faker/Waffle-Fries.jpg',
-        created_at: new Date(),
-        updated_at: new Date()
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         id: 5,
@@ -45,8 +45,8 @@ module.exports = {
         description: '鹹香',
         price: 150,
         image: '/faker/fries.jpg',
-        created_at: new Date(),
-        updated_at: new Date()
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         id: 6,
@@ -54,8 +54,8 @@ module.exports = {
         description: '濃厚起司',
         price: 200,
         image: '/faker/Shredded-Cheese.jpg',
-        created_at: new Date(),
-        updated_at: new Date()
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ])
   },

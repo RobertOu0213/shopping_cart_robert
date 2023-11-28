@@ -1,10 +1,10 @@
 /* 變數 */
 :root {
-  --primary: #73c0f4;
+  --primary: #4169e1;
   --secondary: #f3e4c6;
   --dark: #000;
   --light: #fff;
-  --bg: #e6eff3;
+  --bg: #ff6b35;
 }
 
 html,
@@ -18,7 +18,7 @@ body {
 
 img {
   width: 100% !important;
-  object-fit: contain !important;
+  object-fit: cover;
 }
 
 .backstage {
@@ -29,12 +29,13 @@ img {
   text-decoration: none;
 }
 
+/* btn */
 .btn-custom {
   display: inline-block;
   padding: 10px 15px;
   font-size: 1.1rem;
   font-weight: 700;
-  color: #4169e1;
+  color: var(--primary);
   background: #eef4ed;
   border: none;
   outline: none;
@@ -44,12 +45,30 @@ img {
 
 .btn-custom:hover {
   background: #ff6b35;
-  color: #4169e1;
+  color: var(--primary);
+}
+
+.btn-outline-custom {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--light);
+  border: 1px solid var(--primary);
+  outline: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.btn-outline-custom:hover {
+  color: var(--light);
+  background: var(--primary);
 }
 
 /* navbar */
 .navbar {
-  background: #ff6b35;
+  background: var(--bg);
   padding: 10px 30px;
 }
 
@@ -107,6 +126,5 @@ img {
   right: 10px;
   top: 50%;
   width: 70px;
-  background-color: #ff6600;
-  color: green;
+  background-color: var(--bg);
 }

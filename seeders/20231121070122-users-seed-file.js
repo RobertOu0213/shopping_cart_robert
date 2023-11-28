@@ -9,15 +9,15 @@ module.exports = {
         email: 'root@example.com',
         password: bcrypt.hashSync('123', bcrypt.genSaltSync(10), null),
         role: 'admin',
-        created_at: new Date(),
-        updated_at: new Date()
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         email: 'user1@example.com',
         password: bcrypt.hashSync('123', bcrypt.genSaltSync(10), null),
         role: 'user',
-        created_at: new Date(),
-        updated_at: new Date()
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ])
   },

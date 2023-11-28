@@ -28,8 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.TEXT
   }, {
     sequelize,
-    modelName: 'Product',
-    underscored: true
+    modelName: 'Product'
   })
   return Product
 }
