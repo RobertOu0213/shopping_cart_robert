@@ -2,14 +2,14 @@
   <div class="container-fluid d-flex">
     {{#if user}}
       {{#equal user.role "admin"}}
-      <h1>
-        <a class="navbar-brand" href="/products">PLUS FOOD</a>
-      </h1>
-      <div class="d-flex">
-        <a href="/admin/products" class="backstage me-3">後台登入</a>
-        <span class="navbar-user me-3">{{user.email}}</span>
-        <a href="/admin/logout" class="btn btn-custom">登出</a>
-      </div>
+        <h1>
+          <a class="navbar-brand" href="#">PLUS FOOD</a>
+        </h1>
+        <div class="d-flex">
+          <a href="/admin/products" class="backstage me-3">後台登入</a>
+          <span class="navbar-user me-3">{{user.email}}</span>
+          <a href="/admin/logout" class="btn btn-custom">登出</a>
+        </div>
       {{/equal}}
 
       {{#equal user.role "user"}}
@@ -27,7 +27,7 @@
           <a href="/users/logout" class="btn btn-custom">登出</a>
         </div>
       {{/equal}}
-      {{else}}
+    {{else}}
       <h1>
         <a class="navbar-brand" href="/products">PLUS FOOD</a>
       </h1>
@@ -40,4 +40,3 @@
     {{/if}}
   </div>
 </nav>
-

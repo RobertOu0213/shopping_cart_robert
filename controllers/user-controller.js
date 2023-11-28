@@ -28,14 +28,25 @@ const userController = {
       // // 存入 session
       // req.session.email = email;
       // req.session.token = token;
+      const id = req.user.id
+      let user = await User.findByPk(id)
+      user = user.toJSON()
 
-      req.flash('success_messages', '登入成功')
-      return res.redirect('/products')
+      if (user.role === 'user') {
+        req.flash('success_messages', '登入成功')
+        return res.redirect('/products')
+      }
+      if (user.role === 'admin') {
+        req.flash('success_messages', '登入成功')
+        return res.redirect('/admin/products')
+      }
     } catch (err) {
       console.log(err)
     }
   },
-  registerPage: (req, res) => { res.render('register') },
+  registerPage: (req, res) => {
+    res.render('register')
+  },
   register: async (req, res, next) => {
     try {
       const { email, password, confirmPassword } = req.body
