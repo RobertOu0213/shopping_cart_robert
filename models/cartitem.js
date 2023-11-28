@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true
     },
-    CartId: DataTypes.INTEGER,
-    ProductId: DataTypes.INTEGER,
+    cartId: DataTypes.INTEGER,
+    productId: DataTypes.INTEGER,
     quantity: DataTypes.INTEGER
   }, {
     sequelize,

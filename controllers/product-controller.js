@@ -18,7 +18,7 @@ const productController = {
       } else {
         // 登入後
         let cart = await Cart.findOne({
-          where: { UserId: req.user.id },
+          where: { userId: req.user.id },
           include: 'items'
         })
         if (!req.session.cartId) {
@@ -33,11 +33,11 @@ const productController = {
           if (!cart) {
           // 更新使用者購物車
             await Cart.update(
-              { UserId: req.user.id },
+              { userId: req.user.id },
               { where: { id: req.session.cartId } }
             )
             let userCart = await Cart.findOne({
-              where: { UserId: req.user.id },
+              where: { userId: req.user.id },
               include: 'items'
             })
             userCart = userCart.toJSON()

@@ -3,8 +3,8 @@ const { Cart, Order, OrderItem } = require('../models')
 const orderController = {
   fillOrder: async (req, res) => {
     try {
-      const UserId = req.user.id
-      const cart = await Cart.findOne({ where: { UserId }, include: 'items' })
+      const userId = req.user.id
+      const cart = await Cart.findOne({ where: { userId }, include: 'items' })
       if (!cart || !cart.items.length) {
         req.flash('warning_messages', '購物車是空的!')
         return res.redirect('/cart')
@@ -25,7 +25,7 @@ const orderController = {
       // 建立訂單
       let order = await Order.create({
         ...req.body,
-        UserId: req.user.id
+        userId: req.user.id
       })
       console.log(order)
       order = order.toJSON()
@@ -33,8 +33,8 @@ const orderController = {
       const items = Array.from({ length: cart.items.length })
         .map((_, i) => (
           OrderItem.create({
-            OrderId: order.id,
-            ProductId: cart.items[i].dataValues.id,
+            orderId: order.id,
+            productId: cart.items[i].dataValues.id,
             price: cart.items[i].dataValues.price,
             quantity: cart.items[i].CartItem.dataValues.quantity
           })
@@ -82,11 +82,11 @@ const orderController = {
       const ordersHavingProducts = await Order.findAll({
         raw: true,
         nest: true,
-        where: { UserId: req.user.id },
+        where: { userId: req.user.id },
         include: 'orderProducts'
       })
 
-      const orders = await Order.findAll({ where: { UserId: req.user.id }, raw: true, nest: true })
+      const orders = await Order.findAll({ where: { userId: req.user.id }, raw: true, nest: true })
       orders.forEach(order => { order.items = [] })
 
       ordersHavingProducts.forEach(product => {

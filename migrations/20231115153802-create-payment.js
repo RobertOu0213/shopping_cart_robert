@@ -8,16 +8,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      OrderId: {
+      orderId: {
         type: Sequelize.INTEGER
       },
       payment_method: {
         type: Sequelize.STRING
       },
-      is_success: {
+      isSuccess: {
         type: Sequelize.BOOLEAN
       },
-      paid_at: {
+      paidAt: {
         type: Sequelize.DATE
       },
       message: {

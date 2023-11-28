@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Cart.init({
-    UserId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Cart'
