@@ -37,9 +37,10 @@ const cartController = {
         })
         cart = userCart
       }
+
       const [product, created] = await CartItem.findOrCreate({
         where: {
-          CartId: cart.id,
+          cartId: cart.id,
           productId: req.body.productId
         },
         defaults: { quantity: 1 }
