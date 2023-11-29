@@ -61,7 +61,7 @@ Password: 123
 
 1. 開啟終端機，執行以下指令 :
 
-> `$ git clone `
+> `$ git clone https://github.com/RobertOu0213/shopping_cart_robert `
 
 2. 進入專案資料夾
 
