@@ -27,13 +27,6 @@ app.use(
   })
 )
 
-// app.use((req, res, next) => {
-//   if (req.session.token) {
-//     req.headers.authorization = `Bearer ${req.session.token}`;
-//     return next();
-//   }
-//   return next();
-// });
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
