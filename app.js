@@ -1,6 +1,10 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const express = require('express')
 const app = express()
-const PORT = 3000
+const PORT = process.env.PORT
 const routes = require('./routes')
 const exphbs = require('express-handlebars')
 const path = require('path')
@@ -8,11 +12,11 @@ const flash = require('connect-flash')
 const session = require('express-session')
 const passport = require('./config/passport')
 const methodOverride = require('method-override')
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
 
-app.engine('handlebars', exphbs.engine({ helpers: require('./helpers/handlebars-helpers') }))
+app.engine(
+  'handlebars',
+  exphbs.engine({ helpers: require('./helpers/handlebars-helpers') })
+)
 app.set('view engine', 'handlebars')
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/upload', express.static(path.join(__dirname, 'upload')))
