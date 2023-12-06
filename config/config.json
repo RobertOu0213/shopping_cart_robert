@@ -4,14 +4,16 @@
     "password": "password",
     "database": "shopping_cart_robert",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "seederStorage": "sequelize"
   },
   "test": {
     "username": "root",
     "password": null,
     "database": "database_test",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "seederStorage": "sequelize"
   },
   "production": {
     "use_env_variable": "PROD_DATABASE_URL",
