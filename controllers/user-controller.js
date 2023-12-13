@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs')
 const { User } = require('../models')
-const jwt = require('jsonwebtoken')
 
 const userController = {
   loginPage: (req, res) => {
@@ -9,25 +8,6 @@ const userController = {
   },
   login: async (req, res) => {
     try {
-      // const { email, password } = req.body;
-      // const user = await User.findOne({ where: { email } });
-      // const hashPassword = await bcrypt.compare(password, user.password);
-      // if (!user) {
-      //   req.flash("warning_messages", "信箱錯誤");
-      //   return res.redirect("/users/login");
-      // }
-      // if (!hashPassword) {
-      //   req.flash("warning_messages", "密碼錯誤");
-      //   return res.redirect("/users/login");
-      // }
-
-      // //token
-      // const payload = { id: user.id };
-      // const expiresIn = { expiresIn: "24h" };
-      // const token = jwt.sign(payload, process.env.JWT_SECRET, expiresIn);
-      // // 存入 session
-      // req.session.email = email;
-      // req.session.token = token;
       const id = req.user.id
       let user = await User.findByPk(id)
       user = user.toJSON()

@@ -82,7 +82,6 @@ const adminController = {
   },
   getOrders: async (req, res) => {
     const orders = await Order.findAll({ raw: true, nest: true })
-    console.log(orders)
     return res.render('admin/orders', { orders })
   },
   getOrder: async (req, res) => {
