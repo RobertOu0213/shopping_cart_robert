@@ -1,5 +1,11 @@
-// const button = document.getElementById('test')
-// const block = document.getElementById('show')
-// button.addEventListener('click', function (event) {
-//   block.textContent = 'success'
+const sidePage = document.getElementById('sidePage')
+const productPage = document.getElementById('productPage')
+function changePage () {
+  sidePage.classList.add('d-none')
+  productPage.classList.remove('d-none')
+}
+
+// sidePage.addEventListener('click', () => {
+//   sidePage.classList.add('d-none')
+//   productPage.classList.remove('d-none')
 // })
