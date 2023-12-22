@@ -3,10 +3,9 @@
     {{#if user}}
       {{#equal user.role "admin"}}
         <h1>
-          <a class="navbar-brand" href="#">PLUS FOOD</a>
+          <a class="navbar-brand">PLUS FOOD後台</a>
         </h1>
         <div class="d-flex">
-          <a href="/admin/products" class="backstage me-3">後台登入</a>
           <span class="navbar-user me-3">{{user.email}}</span>
           <a href="/admin/logout" class="btn btn-custom">登出</a>
         </div>

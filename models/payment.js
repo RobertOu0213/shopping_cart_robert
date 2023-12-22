@@ -8,16 +8,18 @@ module.exports = (sequelize, DataTypes) => {
       Payment.belongsTo(models.Order)
     }
   };
-  Payment.init({
-    orderId: DataTypes.INTEGER,
-    paymentMethod: DataTypes.STRING,
-    isSuccess: DataTypes.BOOLEAN,
-    paidAt: DataTypes.DATE,
-    message: DataTypes.TEXT
-  }, {
-    sequelize,
-    modelName: 'Payment',
-    underscored: true
-  })
+  Payment.init(
+    {
+      orderId: DataTypes.INTEGER,
+      payment_method: DataTypes.STRING,
+      isSuccess: DataTypes.BOOLEAN,
+      paidAt: DataTypes.DATE,
+      message: DataTypes.TEXT
+    },
+    {
+      sequelize,
+      modelName: 'Payment'
+    }
+  )
   return Payment
 }

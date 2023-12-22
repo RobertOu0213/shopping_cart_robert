@@ -8,4 +8,6 @@ router.get('/:id', orderController.getOrder)
 router.post('/:id/cancel', orderController.cancelOrder)
 router.get('/', orderController.getOrders)
 
+router.post('/newebpay/callback', orderController.newebpayCallback)
+
 module.exports = router

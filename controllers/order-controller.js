@@ -1,4 +1,5 @@
-const { Cart, Order, OrderItem } = require('../models')
+const { Cart, Order, OrderItem, Payment } = require('../models')
+const mpgData = require('../utils/mpgData')
 
 const orderController = {
   fillOrder: async (req, res) => {
@@ -10,7 +11,12 @@ const orderController = {
         return res.redirect('/cart')
       }
       const cartId = cart.id
-      const amount = cart.items.length > 0 ? cart.items.map(d => d.price * d.CartItem.quantity).reduce((a, b) => a + b) : 0
+      const amount =
+        cart.items.length > 0
+          ? cart.items
+            .map(d => d.price * d.CartItem.quantity)
+            .reduce((a, b) => a + b)
+          : 0
 
       res.render('orderInfo', { cartId, amount })
     } catch (err) {
@@ -27,21 +33,17 @@ const orderController = {
         ...req.body,
         userId: req.user.id
       })
-      console.log(order)
       order = order.toJSON()
-
-      const items = Array.from({ length: cart.items.length })
-        .map((_, i) => (
-          OrderItem.create({
-            orderId: order.id,
-            productId: cart.items[i].dataValues.id,
-            price: cart.items[i].dataValues.price,
-            quantity: cart.items[i].CartItem.dataValues.quantity
-          })
-        ))
+      const items = Array.from({ length: cart.items.length }).map((_, i) =>
+        OrderItem.create({
+          orderId: order.id,
+          productId: cart.items[i].dataValues.id,
+          price: cart.items[i].dataValues.price,
+          quantity: cart.items[i].CartItem.dataValues.quantity
+        })
+      )
 
       await Promise.all(items)
-
       await cart.destroy()
       req.session.cartId = ''
       return res.redirect(`/order/${order.id}`)
@@ -52,13 +54,18 @@ const orderController = {
   getOrder: async (req, res) => {
     try {
       const id = req.params.id
-      let order = await Order.findByPk(id, { include: 'orderProducts' })
-      order = order.toJSON()
-      if (order.paymentStatus === '0') {
-        res.render('order', { order })
+      const order = await Order.findByPk(id, { include: 'orderProducts' })
+      if (order.toJSON().paymentStatus === '0') {
+        const tradeData = mpgData.getData(
+          order.amount,
+          'PLUS-FOOD',
+          req.user.email
+        )
+        await order.update({ sn: tradeData.MerchantOrderNo.toString() })
+        return res.render('order', { order: order.toJSON(), tradeData })
       } else {
         const paidOrder = true
-        res.render('order', { order, paidOrder })
+        return res.render('order', { order: order.toJSON(), paidOrder })
       }
     } catch (err) {
       console.log(err)
@@ -75,7 +82,9 @@ const orderController = {
       })
       req.flash('success_messages', '成功取消訂單')
       return res.redirect('back')
-    } catch (err) { console.log(err) }
+    } catch (err) {
+      console.log(err)
+    }
   },
   getOrders: async (req, res) => {
     try {
@@ -86,8 +95,14 @@ const orderController = {
         include: 'orderProducts'
       })
 
-      const orders = await Order.findAll({ where: { userId: req.user.id }, raw: true, nest: true })
-      orders.forEach(order => { order.items = [] })
+      const orders = await Order.findAll({
+        where: { userId: req.user.id },
+        raw: true,
+        nest: true
+      })
+      orders.forEach(order => {
+        order.items = []
+      })
 
       ordersHavingProducts.forEach(product => {
         const index = orders.findIndex(order => order.id === product.id)
@@ -96,6 +111,41 @@ const orderController = {
       })
 
       res.render('orders', { orders })
+    } catch (err) {
+      console.log(err)
+    }
+  },
+  newebpayCallback: async (req, res) => {
+    try {
+      const data = JSON.parse(mpgData.decryptData(req.body.TradeInfo))
+      // 訂單
+      const order = await Order.findOne({
+        where: { sn: data.Result.MerchantOrderNo }
+      })
+
+      if (data.Status === 'SUCCESS') {
+        // 建立 payment
+        await Payment.create({
+          orderId: order.id,
+          payment_method: data.Result.PaymentMethod
+            ? data.Result.PaymentMethod
+            : data.Result.PaymentType,
+          isSuccess: true,
+          message: data.Message,
+          paidAt: data.Result.PayTime
+        })
+        await order.update({
+          ...req.body,
+          paymentStatus: '1'
+        })
+        req.flash('success_messages', `訂單編號:${order.id} 付款成功!`)
+      } else {
+        req.flash(
+          'warning_messages',
+          `訂單編號:${order.id} 付款失敗!  [說明] ${data.Message}`
+        )
+      }
+      return res.redirect(`/order/${order.id}`)
     } catch (err) {
       console.log(err)
     }

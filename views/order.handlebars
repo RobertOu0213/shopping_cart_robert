@@ -66,11 +66,16 @@
         </div>
         {{#if paidOrder}}{{else}}
           <div class="d-flex">
-            <form name="Newebpay" action="" method="POST" class="d-inline">
-              <button
-                type="submit"
-                class="btn btn-outline-custom me-2"
-              >前往付款</button>
+            <form name="Newebpay" action="{{tradeData.PayGateWay}}" method="POST" class="d-inline">
+              <button type="submit" class="btn btn-outline-custom">前往付款</button>
+              {{!-- MerchantID: --}}
+              <input type="hidden" name="MerchantID" value="{{tradeData.MerchantID}}"><br>
+              {{!-- TradeInfo: --}}
+              <input type="hidden" name="TradeInfo" value="{{tradeData.TradeInfo}}"><br>
+              {{!-- TradeSha: --}}
+              <input type="hidden" name="TradeSha" value="{{tradeData.TradeSha}}"><br>
+              {{!-- Version: --}}
+              <input type="hidden" name="Version" value="{{tradeData.Version}}"><br>
             </form>
             <form
               action="/order/{{order.id}}/cancel"
