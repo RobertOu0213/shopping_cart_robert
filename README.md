@@ -6,7 +6,7 @@
 
 
 
-## 可使用帳號
+## 可使用帳號 & 信用卡卡號(第三方金流)
 
 **Admin**  
 email: root@example.com  
@@ -16,6 +16,11 @@ Password: 123
 email: user1@example.com  
 Password: 123
 
+**信用卡號**
+
+4000-2211-1111-1111  
+日期遠於現在日期  
+驗證碼隨意
 
 ## Features - 產品功能
 
